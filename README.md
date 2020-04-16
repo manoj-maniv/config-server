@@ -12,6 +12,8 @@ Application - Spring Cloud Config with Cloud Bus Support using RabbitMQ
 
 **Security Credentials**: `user`/`password`
 
+**Authentication Type**: `Basic Auth`
+
 
 
 ### RabbitMQ
