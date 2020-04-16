@@ -1,6 +1,19 @@
 # config-server
 Application - Spring Cloud Config with Cloud Bus Support using RabbitMQ
 
+### Spring Cloud Bus Refresh
+
+
+**HTTP Method**: POST
+
+
+**Resource**: http://localhost:8888/actuator/bus-refresh
+
+
+**Security Credentials**: `user`/`password`
+
+
+
 ### RabbitMQ
 #### Command to Run RabbitMQ server using Docker
 
