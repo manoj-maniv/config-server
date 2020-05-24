@@ -5,7 +5,7 @@ Application - Spring Cloud Config with Cloud Bus Support using RabbitMQ
 
 ```
 plugins {
-	id 'org.springframework.boot' version '2.2.6.RELEASE'
+	id 'org.springframework.boot' version '2.3.0.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
 	id 'java'
 }
@@ -19,7 +19,7 @@ repositories {
 }
 
 ext {
-	set('springCloudVersion', "Hoxton.SR3")
+	set('springCloudVersion', "Hoxton.SR4")
 }
 
 dependencies {
@@ -59,11 +59,6 @@ logging.level.org.springframework.cloud=debug
 
 #Enable Spring Cloud Bus - Refresh
 management.endpoints.web.exposure.include=bus-refresh, bus-env
-
-#Removed the below properties which is not required
-#spring.cloud.bus.enabled=true
-#spring.cloud.bus.refresh.enabled=true
-#spring.cloud.bus.env.enabled=true
 
 #RabbitMQ Support
 spring.rabbitmq.host=localhost
@@ -119,8 +114,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().requestMatchers(EndpointRequest.to(HealthEndpoint.class)).permitAll()
-				.requestMatchers(EndpointRequest.toAnyEndpoint()).authenticated().and().httpBasic();
+		http.csrf().disable().authorizeRequests().anyRequest().permitAll().and().httpBasic();
 	}
 }
 ```
@@ -145,10 +139,10 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
 ```
-docker run -d --hostname my-rabbit --name some-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management
+docker run -d --hostname my-rabbit --name rabbit-mq -p 15672:15672 -p 5672:5672 rabbitmq:3-management
 ```
 
-RabbitMQ Server Host: http://localhost:15672/
+RabbitMQ Server Host: http://localhost:15672/#/
 
 
 Default credentials to login into RabbitMQ server: Username: `guest` and Password: `guest`
